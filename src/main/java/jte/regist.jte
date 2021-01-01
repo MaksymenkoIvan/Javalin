@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter</title>
-    <style>
-    html, body, div, span, applet, object, iframe,
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sign Up</title>
+	<style>
+	html, body, div, span, applet, object, iframe,
         h1, h2, h3, h4, h5, h6, p, blockquote, pre,
         a, abbr, acronym, address, big, cite, code,
         del, dfn, em, img, ins, kbd, q, s, samp,
@@ -394,223 +394,133 @@
                 url('../fonts/lato-v15-latin-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
                 url('../fonts/lato-v15-latin-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
         }
-        img{
-
-        }
-        html{
-            overflow-x: hidden; box-sizing: border-box;
-        }
-        *, *::before, *::after{
-            box-sizing: inherit;
-        }
-
-        body{
-            font-family: 'Lato';
-            font-style: normal;
-            font-size: 16px;
-            line-height: 1.2;
-            font-weight: normal;
-            color: #102746;
-        }
-
-        img{
-            max-width: 100%;
-            height: auto;
-        }
-
-        .wrapper{
-            max-width: 1060px;
-            margin: 0 auto;
-        }
-
-        .wrapper-full{
-            max-width: 1262px;
-            margin: 0 auto;
-        }
-
-        .section-title{
-            font-weight: 500;
-            font-size: 35px;
-            line-height: 42px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section-title::after{
-            display: block;
-            content: '';
-            width: 253px;
-            height: 3px;
-            background-color: #006DFE;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
-
-        /* Intro styles start */
-
-        .intro{
-            max-width: 100%;
-            background: url(https://st.depositphotos.com/2000885/1902/i/600/depositphotos_19021343-stock-photo-red-heart.jpg) no-repeat center;
-            background-position: 0 0 -110px;
-            background-size: cover;
-            padding-top: 50px;
-            padding-bottom: 600px;
-            max-width: 100%;
-        }
-
-        .wrapper{
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 0 108px;
+		.full{
+			width: 100%;
+			background: url(https://st.depositphotos.com/2000885/1902/i/600/depositphotos_19021343-stock-photo-red-heart.jpg) no-repeat center;
+			background-size: cover;
             align-items: center;
-        }
-
-        .intro__title{
-            max-width: 619px;
-            font-weight: 500;
-            font-size: 50px;
-            line-height: 60px;
-            color: black;
-            margin-bottom: 22px;
-        }
-
-        .search-form{
-          flex-wrap : wrap;
-          width: 300px;
-        }
-
-        .intro__subtitle{
-            max-width: 546px;
-            color: black;
-            font-size: 16px;
-            line-height: 24px;
-            margin-bottom: 59px;
-        }
-
-        .search-form__info{
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .logpass_field{
-            height: 40px;
-            background-color: transparent;
-            width: 300px;
-            color: white;
-        }
-
-        .logpass_field::placeholder{
-            font-size: 22px;
-            color: black;
-        }
-
-
-        .but-signin{
+			padding-top: 50px;
             position: relative;
+			padding-bottom: 600px;
+			max-width: 100%;
+		}
+
+		.sign{
+            position: relative;
+            left: 43%;
+			font-size: 30px;
+			margin-bottom: 40px;
+			color: black;
+		}
+
+		.search-form{
+            position: relative;
+            left: 40%;
+			margin-top: 20px;
+			width: 300px;
+			text-align: center;
+		}
+
+		.login{
+			color: black;
+			margin-bottom: 10px;
+			font-size: 30px;
+		}
+
+		.pass{
+			color: black;
+			margin-bottom: 10px;
+			font-size: 30px;
+		}
+
+		.re-pass{
+			color: black;
+			margin-bottom: 10px;
+			font-size: 30px;
+		}
+
+		.logpass_field{
+			height: 40px;
+			background-color: transparent;
+			width: 300px;
+			color: black;
+		}
+
+		.logpass_field::placeholder{
+			font-size: 22px;
+			color: black;
+		}
+
+		.button{
+			margin-top: 10px;
+			font-size: 30px;
+			border: 0;
+			margin-top: 10px;
+			color: black;
+		}
+
+		.but-signup{
+			position: relative;
             padding: 5px 26px;
             text-transform: uppercase;
             font-weight: 500;
+            height: 45px;
             font-size: 24px;
             color: white;
-            width: 140px;
             background: #1B7DFF;
             border: 0;
             margin-top: 10px;
-        }
+            left: -78px;
+		}
 
-        .but-signup{
-            position: absolute;
+		.but-cancel{
+			position: relative;
             padding: 5px 26px;
             text-transform: uppercase;
             font-weight: 500;
+            height: 45px;
             font-size: 24px;
             color: white;
             background: #1B7DFF;
             border: 0;
             margin-top: 10px;
-            max-width: 140px;
-            left: 847px;
-            top: 301px;
-        }
+            left: 78px;
+            top: -55px;
+		}
 
-        .SignIn{
-            text-align: center;
-            font-size: 48px;
-            color: black;
-        }
-
-        .login{
-
-            font-size: 30px;
-            color: black;
-            margin-bottom: 10px;
-
-
-        }
-
-        .pass{
-            font-size: 30px;
-            color: black;
-            margin-bottom: 10px;
-        }
-
-        .textunder{
-            margin-top: 25px;
-        }
-
-        .fas fa-times{
-            position: fixed;
-        }
-
-        .undertext{
-            font-size: 12px;
-            color: black;
-            text-align: center;
-        }
-        /* Intro styles end */
-    </style>
+		.logpass_field{
+			height: 40px;
+			background-color: transparent;
+			width: 300px;
+			color: black;
+		}
+	</style>
 </head>
 <body>
+<div class="full" >
 
-<main class="main">
-    <!-- Intro start -->
-    <div class="intro">
-        <div class="wrapper">
-            <div class="titli_subtitle">
-                <h1 class="intro__title">
-                    Counter-Strike: Global Offensive
-                </h1>
-                <p class="intro__subtitle">
-                    Counter-Strike: Global Offensive — многопользовательская
-                    компьютерная игра, разработанная компаниями Valve
-                    и Hidden Path Entertainment. Выпуск игры для
-                    персональных компьютеров на операционных системах
-                    Windows и macOS, также игровых приставках Xbox 360
-                    и PlayStation 3 состоялся 21 августа 2012 года.
-                </p>
-            </div>
-            <form class="search-form" method="POST" action="/api/auth/">
-                <fieldset class="serach-form__wrap">
-                    <p class="search-form__info">
-                    <h1 class="SignIn">Sign In</h1>
-                    <p class="login">login</p>
-                    <input name="login" type="text" class="logpass_field" placeholder="Введите login">
-                    <p class="pass">password</p>
-                    <input name="pass" type="password" class="logpass_field" placeholder="Введите password">
-                    <p class="button-signin"><input class="but-signin" type="submit" value="Log In"></p>
-                    <a href="./registration" class="button-signup"><input  class="but-signup" type="button" value="Sign Up"></a>
-                    </p>
-                </fieldset>
-            </form>
+	<div class="intro">
 
-        </div>
-        <div class="textunder">
-            <h1 class="undertext" >2020, Ivan Maksymenko</h1>
-        </div>
-    </div>
-    <!-- Intro end -->
-</main>
+		<hi class="sign">Sign Up</hi>
+
+	</div>
+
+	<div class="not_full">
+		<form class="search-form" method="POST" action="/api/register/">
+			<fieldset class="serach-form__wrap">
+				<p class="search-form__info">
+				<p class="login">login</p>
+				<input name="login" type="text" class="logpass_field" placeholder="Enter your login">
+				<p class="pass">password</p>
+				<input name="pass" type="password" class="logpass_field" placeholder="Enter your password">
+				<p class="pass">re-pass</p>
+				<input name="repass" type="password" class="logpass_field" placeholder="Enter your re-pass">
+				<p class="signup"><input type="submit" class="but-signup" value="Sign Up"></p>
+				<a href="./login" class="cancel"><input type="button" class="but-cancel" value="Cancel"></a>
+				</p>
+			</fieldset>
+		</form>
+	</div>
+</div>
 </body>
 </html>

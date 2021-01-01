@@ -1,6 +1,11 @@
 package org.example;
 
-import java.sql.*;
+import org.hibernate.Session;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +15,7 @@ public class Data extends  Config {
     private Connection connection = null;
     private List<String> messages = new ArrayList<>();
     private StringBuilder string = new StringBuilder();
+
     public Data() {
         try {
 
@@ -40,24 +46,6 @@ public class Data extends  Config {
         }
         return result;
 
-    }
-
-    public boolean exists(String login){
-        try {
-            PreparedStatement select = connection.prepareStatement("SELECT COUNT(login) FROM users WHERE users.login = ?");
-            select.setString(1, login);
-            ResultSet set = select.executeQuery();
-            while (set.next()) {
-                if (Integer.parseInt(set.getString(1)) == 0){
-                    return true;
-                }else {
-                    System.out.println("Bad");
-                }
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public boolean register(String login, String pass, String repass){
@@ -117,75 +105,66 @@ public class Data extends  Config {
             select.setString(1, login);
             ResultSet set = select.executeQuery();
             while (set.next()){
-                balance = set.getDouble(1);
+                 balance = set.getDouble(1);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
         return balance;
     }
-
-    public boolean getUserName(String username) throws SQLException {
-        PreparedStatement select = connection.prepareStatement("SELECT users FROM users WHERE users.login = ?");
-        select.setString(1, username);
-        ResultSet set = select.executeQuery();
-        return true;
-    }
-
-
-    public void insertNewMassage (String name, String message){
-        try {
-            PreparedStatement insert  = connection.prepareStatement("INSERT INTO messages (username , message)" + "VALUES(?,?)");
-            insert.setString(1,name);
-            insert.setString(2,message);
-            insert.executeUpdate();
-            System.out.println("Success Insert");
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public StringBuilder firstRaws(){
-        try {
-            PreparedStatement select = connection.prepareStatement("SELECT * FROM messages ORDER BY id DESC LIMIT 15");
-            ResultSet list = select.executeQuery();
-            while (list.next()) {
-                messages.add("[" + list.getString(2) + "]: " + list.getString(3) + "\n");
-            }
-            for (int i = messages.size() - 1; i >= 0; i--) {
-                string.append(messages.get(i));
-            }
+    public void changelogin(String cLogin, String fLogin){
+        try{
+            PreparedStatement first = connection.prepareStatement(
+                    "UPDATE users SET login =  ? WHERE login = ?"
+            );
+            first.setString(1, fLogin);
+            first.setString(2, cLogin);
+            first.executeUpdate();
         }catch (Exception e){
             System.out.println(e);
         }
-        return string;
     }
-    public void transfer(int myid, int id, double mybalance, double balance) {
-        try {
-            PreparedStatement first = connection.prepareStatement("UPDATE users SET balance=? WHERE id=?");
-            PreparedStatement second = connection.prepareStatement("UPDATE users SET balance=? WHERE id=?");
-            first.setString(1, String.valueOf(mybalance - balance));
-            first.setInt(2, myid);
-            second.setString(1, String.valueOf(getBalanceById(id) + (mybalance - (mybalance - balance))));
-            second.setInt(2, id);
+
+    public void setbalance(double balance, String login){
+        try{
+            PreparedStatement first = connection.prepareStatement(
+                    "UPDATE users SET balance = balance + ? WHERE login = ?"
+            );
+            first.setDouble(1, balance);
+            first.setString(2, login);
             first.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public String getUserName(String login){
+        try{
+            PreparedStatement select = connection.prepareStatement("SELECT login FROM users WHERE users.id = ?");
+            select.setString(1, login);
+            ResultSet set = select.executeQuery();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return login;
+    }
+
+    public void transfer(int id, int uid,
+                         double balance, double ubalance){
+        try{
+            PreparedStatement first = connection.prepareStatement(
+                    "UPDATE users SET balance = balance - ? WHERE id = ?"
+            );
+            first.setDouble(1, ubalance);
+            first.setInt(2, id);
+            first.executeUpdate();
+            PreparedStatement second = connection.prepareStatement(
+                    "UPDATE users SET balance = balance + ? WHERE id = ?");
+            second.setDouble(1, ubalance);
+            second.setInt(2, uid);
             second.executeUpdate();
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e);
         }
-    }
-    public double getBalanceById(int id){
-        double balance = 0;
-        try{
-            PreparedStatement select = connection.prepareStatement(
-                    "SELECT balance FROM users WHERE id = ?");
-            select.setString(1, Integer.toString(id));
-            ResultSet set = select.executeQuery();
-            while (set.next()){
-                balance = set.getDouble(1);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return balance;
     }
 }

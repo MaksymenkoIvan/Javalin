@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 @param org.example.User user
+@param org.example.Data data
 
 <html lang="en">
 <head>
@@ -9,11 +10,11 @@
     <title>Document</title>
     <style>
         body{
-            background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJrAQw5D1NMqGPoDVwI9Wk6SAClbgA0Hz0pA&usqp=CAU);
+            background: url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v462-n-130-textureidea_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=9465282a2b0a375f4f5b120d7bbad882);
         }
         .navigation{
             position: fixed;
-            top: 7%;
+            top: 19%;
             left: 10px;
         }
         ul.nav{
@@ -22,18 +23,19 @@
                 list-style: none;
         }
         ul.nav a {
-            background: url(https://image.freepik.com/free-vector/speed-and-motion-futuristic-blue-background_23-2148400715.jpg);
+            background: transparent;
             display: block;
             width: 7em;                padding:10px;
-            background-color: #f4f4f4;
-            border-top: 1px dashed #333;
-            border-right: 1px dashed #333;
-            border-left: 5px solid #333;
+            background-color: transparent;
+            border-top: 1px dashed transparent;
+            border-right: 1px dashed transparent;
+            border-left: 5px solid #FFF;
+            border-bottom: 1px dashed transparent;
             text-decoration: none;
             color: white;
         }
         ul.nav li:last-child a {
-            border-bottom: 1px dashed #333;
+            border-bottom: 1px dashed #FFF;
         }
         .tab{
             position: absolute;
@@ -124,18 +126,18 @@
 <body>
 <div class="navigation">
     <ul class="nav">
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">Мои счета</a></li>
-        <li><a href="#">Моя информация</a></li>
-        <li><a href="#">Настройки</a></li>
-        <li><a href="#">Выход</a></li>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/mybills">My bills</a></li>
+        <li><a href="/myinfo">My information</a></li>
+        <li><a href="/settings">Settings</a></li>
+        <li><a href="/login">Log out</a></li>
     </ul>
 </div>
 <div class="table">
     <table class="tab">
 
         <tr>
-            <td>Name: </td>
+            <td>Name: ${user.getUserName()}</td>
         </tr>
         <tr>
             <td>ID: ${user.getId()}</td>
@@ -148,9 +150,9 @@
     <form class="search-form" method="POST" action="/api/transfer/">
         <fieldset class="serach-form__wrap">
             <p class="login">id</p>
-            <input name="id" type="text" class="logpass_field" placeholder="Введите id">
+            <input name="id" type="text" class="logpass_field" placeholder="Enter your id">
             <p class="pass">Amount</p>
-            <input name="amount" type="text" class="logpass_field" placeholder="Введите Сумму">
+            <input name="amount" type="text" class="logpass_field" placeholder="Enter sum">
             <p class="signup"><input type="submit" class="but-signup" value="Send"></p>
         </fieldset>
     </form>
