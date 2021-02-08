@@ -37,22 +37,9 @@
         ul.nav li:last-child a {
             border-bottom: 1px dashed #FFF;
         }
-        .tab{
-            position: absolute;
-            left: 20%;
-            top: 60px;
-        }
-        .tab{
-            border: 1px;
-            border-color: black;
-        }
-        td{
-            font-size: 40px;
-            color: white;
-        }
 
 		.search-form{
-			margin-top: 240px;
+			margin-top: 100px;
 			position: relative;
 			left: 39%;
 			width: 300px;
@@ -69,13 +56,13 @@
 			flex-wrap: wrap;
 		}
 
-		.login{
+		.login1{
 			color: white;
 			margin-bottom: 10px;
 			font-size: 30px;
 		}
 
-		.pass{
+		.login2{
 			color: white;
 			margin-bottom: 10px;
 			font-size: 30px;
@@ -129,31 +116,19 @@
         <li><a href="/home">Home</a></li>
         <li><a href="/mybills">My bills</a></li>
         <li><a href="/myinfo">My information</a></li>
+        <li><a href="/sum">SUM</a></li>
         <li><a href="/settings">Settings</a></li>
         <li><a href="/login">Log out</a></li>
     </ul>
 </div>
 <div class="table">
-    <table class="tab">
-
-        <tr>
-            <td>Name: ${user.getUserName()}</td>
-        </tr>
-        <tr>
-            <td>ID: ${user.getId()}</td>
-        </tr>
-        <tr>
-            <td>Balance: ${user.getBalance()}</td>
-        </tr>
-
-    </table>
-    <form class="search-form" method="POST" action="/api/transfer/">
+    <form class="search-form" method="POST" action="/api/fullsum/">
         <fieldset class="serach-form__wrap">
-            <p class="login">id</p>
-            <input name="id" type="text" class="logpass_field" placeholder="Enter your id">
-            <p class="pass">Amount</p>
-            <input name="amount" type="text" class="logpass_field" placeholder="Enter sum">
-            <p class="signup"><input type="submit" class="but-signup" value="Send"></p>
+            <p class="login1">Login1</p>
+            <input name="log1" type="text" class="logpass_field" placeholder="Enter login1">
+            <p class="login2">Login2</p>
+            <input name="log2" type="text" class="logpass_field" placeholder="Enter login2">
+            <p class="button"><input  class="but-signup" type="submit" value="SUM"></p>
         </fieldset>
     </form>
 </div>

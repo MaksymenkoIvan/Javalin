@@ -11,7 +11,7 @@ public class App {
     public static Data data = new Data();
     public static void main( String[] args )
     {
-        Javalin javalin = Javalin.create().start(2018);
+        Javalin javalin = Javalin.create().start(3022);
         javalin.get("/", ctx ->{
             System.out.println(ctx.status());
             ctx.render("login.jte");
@@ -32,11 +32,26 @@ public class App {
             System.out.println(ctx.status());
             ctx.render("topupbalance.jte");
         });
+        javalin.get("/sum", ctx ->{
+            System.out.println(ctx.status());
+            ctx.render("sum.jte");
+        });
+        javalin.get("/fullsum", App::renderFullSumPage);
+        javalin.post("/api/fullsum/", ctx -> {
+            String log1 = ctx.formParam("log1");
+            System.out.println("1-st log: " + log1);
+            String log2 = ctx.formParam("log2");
+            System.out.println("2-nd log: " + log2);
+            System.out.println("Balance 1 log: " + data.getBalance(log1));
+            System.out.println("Balance 2 log: " + data.getBalance(log2));
+            user.sumBalance = data.sum(log1, log2);
+            System.out.println("Sum: " + user.sumBalance);
+            ctx.redirect("/fullsum");
+        });
         javalin.get("/mybills", App::renderBillsPage);
         javalin.get("/myinfo", App::renderInfoPage);
         javalin.get("/settings", App::renderSettingsPage);
         javalin.get("/incorrectpass", ctx ->{
-            System.out.println(ctx.status());
             ctx.render("incorrect_password.jte");
         });
         javalin.post("/api/auth/", ctx ->{
@@ -48,7 +63,7 @@ public class App {
             if (data.auth(login, pass)){
                 System.out.println("GOOD");
                 ctx.cookie("login", login);
-                ctx.  redirect("/home");
+                ctx.redirect("/home");
             }else {
                 System.out.println("BAD");
                 ctx.redirect("/incorrectpass");
@@ -114,6 +129,9 @@ public class App {
     public static void renderBillsPage(Context ctx){
         user.balance = data.getBalance(ctx.cookie("login"));
         ctx.render("mybills.jte", Collections.singletonMap("user", user));
+    }
+    public static void renderFullSumPage(Context ctx){
+        ctx.render("fullsum.jte", Collections.singletonMap("user", user));
     }
     public static void renderInfoPage(Context ctx){
         user.userName = data.getUserName(ctx.cookie("login"));

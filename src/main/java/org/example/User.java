@@ -6,6 +6,7 @@ public class User {
     public String userName;
     public int id;
     public double balance;
+    public double sumBalance;
 
     public String getUserName(){
         return userName;
@@ -29,5 +30,9 @@ public class User {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public double getSumBalance() {
+        return sumBalance;
     }
 }

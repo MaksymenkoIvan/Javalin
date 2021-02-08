@@ -19,7 +19,7 @@ public class Data extends  Config {
     public Data() {
         try {
 
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(HOST, USER, PASS);
 
         } catch (Exception e) {
@@ -30,7 +30,7 @@ public class Data extends  Config {
         String result = null;
         try {
 
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(HOST, USER, PASS);
             PreparedStatement select =  connection.prepareStatement("SELECT pass FROM users WHERE login=? ");
             select.setString(1,login);
@@ -112,6 +112,12 @@ public class Data extends  Config {
         }
         return balance;
     }
+
+    public double sum(String login1, String login2){
+        double sumBalance = getBalance(login1) + getBalance(login2);
+        return sumBalance;
+    }
+
     public void changelogin(String cLogin, String fLogin){
         try{
             PreparedStatement first = connection.prepareStatement(
