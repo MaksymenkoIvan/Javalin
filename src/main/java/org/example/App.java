@@ -54,6 +54,8 @@ public class App {
         javalin.get("/incorrectpass", ctx ->{
             ctx.render("incorrect_password.jte");
         });
+        javalin.get("/api/auth/balance", App::balance);
+
         javalin.post("/api/auth/", ctx ->{
             System.out.println(ctx.formParam("login"));
             System.out.println(ctx.formParam("pass"));
@@ -132,6 +134,9 @@ public class App {
     }
     public static void renderFullSumPage(Context ctx){
         ctx.render("fullsum.jte", Collections.singletonMap("user", user));
+    }
+    public static void balance(Context ctx){
+        ctx.json(user.getBalance());
     }
     public static void renderInfoPage(Context ctx){
         user.userName = data.getUserName(ctx.cookie("login"));
