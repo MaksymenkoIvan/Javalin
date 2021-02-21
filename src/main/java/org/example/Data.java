@@ -146,7 +146,7 @@ public class Data extends  Config {
 
     public String getUserName(String login){
         try{
-            PreparedStatement select = connection.prepareStatement("SELECT login FROM users WHERE users.id = ?");
+            PreparedStatement select = connection.prepareStatement("SELECT login FROM users WHERE login = ?");
             select.setString(1, login);
             ResultSet set = select.executeQuery();
         }catch (Exception e){

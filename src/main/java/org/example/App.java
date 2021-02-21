@@ -28,6 +28,22 @@ public class App {
             System.out.println(ctx.status());
             ctx.render("login.jte");
         });
+        javalin.get("/balance/" + user.getUserName(), App::balance);
+        javalin.post("/api/auth/", ctx ->{
+            System.out.println(ctx.formParam("login"));
+            System.out.println(ctx.formParam("pass"));
+            String login = ctx.formParam("login");
+            String pass = ctx.formParam("pass");
+            data.connect(login);
+            if (data.auth(login, pass)){
+                System.out.println("GOOD");
+                ctx.cookie("login", login);
+                ctx.redirect("/balance/" + user.getUserName());
+            }else {
+                System.out.println("BAD");
+                ctx.redirect("/incorrectpass");
+            }
+        });
         javalin.get("/topupbalance", ctx ->{
             System.out.println(ctx.status());
             ctx.render("topupbalance.jte");
@@ -54,9 +70,8 @@ public class App {
         javalin.get("/incorrectpass", ctx ->{
             ctx.render("incorrect_password.jte");
         });
-        javalin.get("/api/auth/balance", App::balance);
 
-        javalin.post("/api/auth/", ctx ->{
+        /* javalin.post("/api/auth/", ctx ->{
             System.out.println(ctx.formParam("login"));
             System.out.println(ctx.formParam("pass"));
             String login = ctx.formParam("login");
@@ -71,6 +86,7 @@ public class App {
                 ctx.redirect("/incorrectpass");
             }
         });
+         */
         javalin.post("/api/transfer/", ctx->{
            String id = ctx.formParam("id");
            String balanace = ctx.formParam("amount");
@@ -136,7 +152,10 @@ public class App {
         ctx.render("fullsum.jte", Collections.singletonMap("user", user));
     }
     public static void balance(Context ctx){
-        ctx.json(user.getBalance());
+        System.out.println(data.getUserName(ctx.cookie("login")));
+        user.userName = data.getUserName(ctx.cookie("login"));
+        System.out.println("name: " + user.getUserName());
+        ctx.json(data.getBalance(ctx.cookie("login")));
     }
     public static void renderInfoPage(Context ctx){
         user.userName = data.getUserName(ctx.cookie("login"));
