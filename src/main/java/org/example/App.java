@@ -11,6 +11,7 @@ public class App {
     public static Data data = new Data();
     public static void main( String[] args )
     {
+
         Javalin javalin = Javalin.create().start(3022);
         javalin.get("/", ctx ->{
             System.out.println(ctx.status());
@@ -38,7 +39,7 @@ public class App {
             if (data.auth(login, pass)){
                 System.out.println("GOOD");
                 ctx.cookie("login", login);
-                ctx.redirect("/balance/" + user.getUserName());
+                ctx.redirect("/home");
             }else {
                 System.out.println("BAD");
                 ctx.redirect("/incorrectpass");
@@ -76,6 +77,7 @@ public class App {
             System.out.println(ctx.formParam("pass"));
             String login = ctx.formParam("login");
             String pass = ctx.formParam("pass");
+            username = ctx.formParam(login);
             data.connect(login);
             if (data.auth(login, pass)){
                 System.out.println("GOOD");
