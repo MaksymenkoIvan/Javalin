@@ -1,13 +1,9 @@
 package org.example;
 
-import org.hibernate.Session;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Data extends  Config {
@@ -97,7 +93,7 @@ public class Data extends  Config {
         return myid;
     }
 
-    public double getBalance(String login){
+    public double getBalanceName(String login){
         double balance = 0;
         try{
             PreparedStatement select = connection.prepareStatement(
@@ -112,9 +108,24 @@ public class Data extends  Config {
         }
         return balance;
     }
+    public Optional<Double> getBalanceId(String id) {
+        double balance = 0;
+        try {
+            PreparedStatement select = connection.prepareStatement(
+                    "SELECT balance FROM users WHERE id = ?");
+            select.setString(1, id);
+            ResultSet set = select.executeQuery();
+            if (set.next()) {
+                return Optional.of(set.getDouble(1));
+            }
+        }catch (SQLException throwables) {
+            throw new IllegalStateException();
+        }
+        return Optional.empty();
+    }
 
     public double sum(String login1, String login2){
-        double sumBalance = getBalance(login1) + getBalance(login2);
+        double sumBalance = getBalanceName(login1) + getBalanceName(login2);
         return sumBalance;
     }
 
