@@ -3,6 +3,7 @@ package org.example;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.Collections;
 import java.util.Optional;
 
